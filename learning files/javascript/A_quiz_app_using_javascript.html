@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>quiz</title>
+	<script>
+		const questions = [
+			{
+				question: 'who killed goliath?',
+				options: ["david", "solomon", "john","peter"],
+				answer:"david"
+			},
+
+			{
+				question:"which of these languages manipulates the DOM",
+				options:["html", "python", "javascript", "php"],
+				answer:"javascript"
+			},
+
+			{
+				question:"what is the floor division of 5/2",
+				options:["15", "3", "2", "10"],
+				answer:"2"
+			}
+		];
+
+		let correct = 0;
+		let question_number = 0;
+		let que = questions.length;
+
+		document.addEventListener('DOMContentLoaded', () => {
+			question_loaded();
+		});
+
+		function question_loaded (){
+			document.querySelector('h2').innerHTML = questions[question_number].question;
+			const labels =questions[question_number].options;
+			for ( const label of labels){
+				console.log(label);
+				document.querySelector("#options").innerHTML += `<button class = "label">${label}</button>` ;
+				document.querySelector("#correct").innerHTML =`Question_correct: ${correct} of ${que}`; 
+
+		};
+	//};
+			
+	//	document.addEventListener('DOMContentLoaded', () =>{
+			document.querySelectorAll('button').forEach(button =>{
+				button.onclick = () =>{	
+						if (button.innerHTML === questions[question_number].answer){
+								correct++;
+							}
+						question_number++;
+						document.querySelector("#options").innerHTML="";
+						if (question_number === que){
+							document.querySelector('h2').innerHTML = "Quiz Completed"
+							document.querySelector("#correct").innerHTML =`you got ${correct} out of ${que} correct`;
+						}else{
+						question_loaded();
+					}
+						
+					};
+
+
+
+			});
+		};
+	//	});
+
+
+	</script>
+
+	<style>
+		button{
+			padding:1%;
+			margin:1%;
+			margin-bottom: 2%;
+			background-color:#e7e7e7; 
+		}
+
+		body{
+			text-align:center;
+			font-family:sans-serif;
+		}
+
+	</style>
+</head>
+<body>
+	<h1>QUIZ</h1>
+	<h2 id="questions"></h2>
+	<div id="options"></div>
+	<div>
+			<span id="correct"></span>
+	</div>
+</body>
+</html>

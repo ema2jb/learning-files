@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang = "en">
+	<head>
+		<meta charset = "UTF-8">
+		<title>To do list</title>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+
+				//The submit button should be disabled by default
+				document.querySelector('#submit').disabled = true;
+
+				document.querySelector('#task').onkeyup = () => {
+					if (document.querySelector('#task').value.length > 0) {
+						document.querySelector('#submit').disabled = false;
+					} else {
+					document.querySelector('#submit').disabled = true;
+				}
+
+				}
+				document.querySelector('form').onsubmit = () => {
+					const task = document.querySelector('#task').value;
+					console.log(task);
+					const list = document.createElement('li');
+					list.innerHTML = task;
+					document.querySelector('#tasks').append(list);
+					document.querySelector('#task').value = '';
+					document.querySelector('#submit').disabled = true;
+
+					//stop from submitting
+					return false;
+
+				};
+			});
+		</script>
+	</head>
+	<body>
+		<h1>Tasks</h1>
+		<ul id="tasks">
+			
+		</ul>
+		<form>
+			<input type ="text" Placeholder="New Task" id = "task">
+			<input id ="submit" type = "submit">
+		</form>
+	</body>
+	</html>
